@@ -4,6 +4,11 @@ require 'spec_helper'
 describe(Store) do
   it { should have_and_belong_to_many(:shoes)}
 
+  it 'ensures the name is present' do
+    store = Store.new({:name => ''})
+    expect(store.save).to eq(false)
+  end
+
   it 'ensures the length of name is a maximum of 100 characters' do
     store = Store.new({:name => 'n'.*(101)})
     expect(store.save).to eq(false)
@@ -24,6 +29,11 @@ end
 
 describe(Shoe) do
   it { should have_and_belong_to_many(:stores)}
+
+  it 'ensures the brand is present' do
+    shoe = Shoe.new({:brand => ''})
+    expect(shoe.save).to eq(false)
+  end
 
   it 'ensures the length of brand is a maximum of 100 characters' do
     shoe = Shoe.new({:brand => 'b'.*(101)})
