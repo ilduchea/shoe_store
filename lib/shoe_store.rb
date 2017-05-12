@@ -26,4 +26,9 @@ private
     end
     self.brand = brands.join(' ')
   end
+
+  def self.to_money (number)
+    cents = number.*(100)
+    Money.new(cents).format
+  end
 end

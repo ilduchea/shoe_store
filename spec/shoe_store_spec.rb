@@ -34,7 +34,7 @@ describe(Shoe) do
 
   it 'stores the price as a monetary value' do
     shoe = Shoe.create({:brand => 'brand name'})
-    price = Money.new(1000).format
+    price = Shoe.to_money(10)
     shoe.update({:price => price})
     expect(shoe.price).to eq('$10.00')
   end
