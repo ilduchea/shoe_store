@@ -1,3 +1,4 @@
+require 'money'
 require 'spec_helper'
 
 describe(Store) do
@@ -29,5 +30,12 @@ describe(Shoe) do
   it 'capitalizes the first letter of each word in the brand' do
     shoe = Shoe.create({:brand => 'brand name'})
     expect(shoe.brand).to eq('Brand Name')
+  end
+
+  it 'stores the price as a monetary value' do
+    shoe = Shoe.create({:brand => 'brand name'})
+    price = Money.new(1000).format
+    shoe.update({:price => price})
+    expect(shoe.price).to eq('$10.00')
   end
 end
