@@ -1,9 +1,8 @@
 class Store < ActiveRecord::Base
   has_and_belongs_to_many(:shoes)
-  validates(:name, {:presence => true, :length => {:maximum => 100}})
-  before_save(:capitalize_each)
+  validates :name, presence: true, length: {maximum: 100}, uniqueness: true
+  before_validation(on: :create) {self.capitalize_each}
 
-private
   def capitalize_each
     names = name.split
     names.each do |n|
@@ -15,10 +14,14 @@ end
 
 class Shoe < ActiveRecord::Base
   has_and_belongs_to_many(:stores)
-  validates(:brand, {:presence => true, :length => {:maximum => 100}})
-  before_save(:capitalize_each)
+  validates :brand, presence: true, length: {maximum: 100}, uniqueness: true
+  before_validation(on: :create) {self.capitalize_each}
 
-private
+  def self.to_money (number)
+    cents = number.*(100)
+    Money.new(cents).format
+  end
+
   def capitalize_each
     brands = brand.split
     brands.each do |b|
@@ -27,8 +30,4 @@ private
     self.brand = brands.join(' ')
   end
 
-  def self.to_money (number)
-    cents = number.*(100)
-    Money.new(cents).format
-  end
 end
