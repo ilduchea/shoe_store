@@ -7,3 +7,13 @@ get '/' do
   @stores = Store.all
   erb :index
 end
+
+get '/create_store' do
+  erb :create_store
+end
+
+post '/create_store' do
+  name = params.fetch('name')
+  Store.create({name: name})
+  redirect '/'
+end
