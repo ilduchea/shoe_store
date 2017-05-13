@@ -26,7 +26,7 @@ end
 
 post '/create_shoe' do
   brand = params.fetch('brand')
-  number = params.fetch('price').to_i
+  number = params.fetch('price').to_f
   price = Shoe.to_money(number)
   Shoe.create({brand: brand, price: price})
   redirect '/create_shoe'

@@ -13,9 +13,9 @@ describe 'creating a new store', {type: :feature} do
     visit '/'
     click_on 'Create Shoe'
     fill_in 'brand', with: 'New Shoe'
-    fill_in 'price', with: 50
+    fill_in 'price', with: 51.42
     click_button 'Create Shoe'
-    expect(page).to have_content 'New Store'
+    expect(page).to have_content '$51.42'
   end
 
   it 'allows a user to update the store name' do
