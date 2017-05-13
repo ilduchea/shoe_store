@@ -37,6 +37,7 @@
     <input type="hidden" name="_method" value="patch">
     <label for="shoe">Select a Shoe</label>
     <select class="" name="shoe">
+      <option value="0">Brands</option>
       <% @shoes.each do |shoe| %>
         <option value="<%= shoe.id %>"><%= shoe.brand %></option>
       <% end %>

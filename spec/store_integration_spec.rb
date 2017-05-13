@@ -34,6 +34,13 @@ describe 'creating a new store', {type: :feature} do
     expect(page).to have_content('New Shoe')
   end
 
+  it 'allows the user to remove a shoe from the store' do
+    visit '/'
+    click_on 'New Store2'
+    click_on 'Remove'
+    expect(page).to have_no_content('Remove')
+  end
+
   it 'allows the user to delete a store' do
     visit '/'
     click_on 'New Store2'

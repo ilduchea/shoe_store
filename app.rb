@@ -33,7 +33,6 @@ end
 get '/store/:id' do
   store_id = params.fetch('id').to_i
   @store = Store.find(store_id)
-  @store_shoes = @store.shoes
   @shoes = Shoe.order('brand')
   erb :store
 end
@@ -59,5 +58,14 @@ patch '/store/:id/add_shoe' do
   store = Store.find(store_id)
   shoe = Shoe.find(shoe_id)
   store.shoes.push(shoe)
+  redirect "/store/#{store_id}"
+end
+
+get '/store/:id/remove_shoe/:shoe_id' do
+  store_id = params.fetch('id').to_i
+  shoe_id = params.fetch('shoe_id').to_i
+  store = Store.find(store_id)
+  shoe = Shoe.find(shoe_id)
+  store.shoes.delete(shoe)
   redirect "/store/#{store_id}"
 end
