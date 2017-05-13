@@ -52,3 +52,12 @@ patch '/edit_name/:id' do
   store.update({name: name})
   redirect "/store/#{id}"
 end
+
+patch '/store/:id/add_shoe' do
+  store_id = params.fetch('id').to_i
+  shoe_id = params.fetch('shoe').to_i
+  store = Store.find(store_id)
+  shoe = Shoe.find(shoe_id)
+  store.shoes.push(shoe)
+  redirect "/store/#{store_id}"
+end

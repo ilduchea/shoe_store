@@ -23,7 +23,7 @@
         <th>Price</th>
         <th>Edit</th>
       </tr>
-      <% @store_shoes.each do |shoe| %>
+      <% @store.shoes.each do |shoe| %>
         <tr>
           <td><%= shoe.brand %></td>
           <td><%= shoe.price %></td>
@@ -34,6 +34,7 @@
   </div>
 
   <form class="col-md-6" action="/store/<%= @store.id %>/add_shoe" method="post">
+    <input type="hidden" name="_method" value="patch">
     <label for="shoe">Select a Shoe</label>
     <select class="" name="shoe">
       <% @shoes.each do |shoe| %>
