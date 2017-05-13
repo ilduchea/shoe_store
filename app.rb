@@ -1,5 +1,5 @@
 require 'bundler/setup'
-require 'money'
+
 Bundler.require(:default)
 Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file }
 
@@ -28,4 +28,27 @@ post '/create_shoe' do
   price = Shoe.to_money(number)
   Shoe.create({brand: brand, price: price})
   redirect '/'
+end
+
+get '/store/:id' do
+  store_id = params.fetch('id').to_i
+  @store = Store.find(store_id)
+  @store_shoes = @store.shoes
+  @shoes = Shoe.order('brand')
+  erb :store
+end
+
+delete '/delete_store/:id' do
+  id = params.fetch('id').to_i
+  store = Store.find(id)
+  store.destroy
+  redirect '/'
+end
+
+patch '/edit_name/:id' do
+  id = params.fetch('id').to_i
+  name = params.fetch('name')
+  store = Store.find(id)
+  store.update({name: name})
+  redirect "/store/#{id}"
 end

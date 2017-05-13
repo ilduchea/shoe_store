@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-md-6">
+    <h2><%= @store.name %></h2>
+    <form action="/delete_store/<%= @store.id %>" method="post">
+      <input type="hidden" name="_method" value="delete">
+      <button type="submit" name="delete">Delete</button>
+    </form>
+  </div>
+  <form class="" action="/edit_name/<%= @store.id %>" method="post">
+    <input type="hidden" name="_method" value="patch">
+    <label for="name">Store Name:</label>
+    <input type="text" name="name">
+    <button type="submit" name="edit_name">Edit Store Name</button>
+  </form>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <h3>Shoes</h3>
+    <table>
+      <tr>
+        <th>Brand</th>
+        <th>Price</th>
+        <th>Edit</th>
+      </tr>
+      <% @store_shoes.each do |shoe| %>
+        <tr>
+          <td><%= shoe.brand %></td>
+          <td><%= shoe.price %></td>
+          <td><a href="/store/<%= @store.id %>/remove_shoe/<%= shoe.id %>">Remove</a></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+
+  <form class="col-md-6" action="/store/<%= @store.id %>/add_shoe" method="post">
+    <label for="shoe">Select a Shoe</label>
+    <select class="" name="shoe">
+      <% @shoes.each do |shoe| %>
+        <option value="<%= shoe.id %>"><%= shoe.brand %></option>
+      <% end %>
+    </select>
+    <button type="submit" name="add_shoe">Add Shoe</button>
+  </form>
+</div>

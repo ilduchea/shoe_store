@@ -8,4 +8,12 @@ describe 'creating a new store', {type: :feature} do
     click_button 'Create Store'
     expect(page).to have_content 'New Store'
   end
+
+  it 'allows the user to delete a store' do
+    visit '/'
+    click_on 'New Store'
+    click_on 'Delete'
+    expect(page).to have_content('Stores:')
+  end
+
 end
