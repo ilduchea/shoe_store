@@ -32,7 +32,7 @@ This site is designed for a shoe distributor to track shoe brands and stores.
 * Open localhost:4567 in chrome.
 
 ## Known Bugs
-_No user interface_
+_No known bugs_
 
 ## Support and Contact details
 * Tyler Stephenson

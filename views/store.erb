@@ -36,8 +36,8 @@
   <form class="col-md-6" action="/store/<%= @store.id %>/add_shoe" method="post">
     <input type="hidden" name="_method" value="patch">
     <label for="shoe">Select a Shoe</label>
-    <select class="" name="shoe">
-      <option value="0">Brands</option>
+    <select class="" name="shoe" required>
+      <option value="" hidden>Brands</option>
       <% @shoes.each do |shoe| %>
         <option value="<%= shoe.id %>"><%= shoe.brand %></option>
       <% end %>
