@@ -17,3 +17,15 @@ post '/create_store' do
   Store.create({name: name})
   redirect '/'
 end
+
+get '/create_shoe' do
+  erb :create_shoe
+end
+
+post '/create_shoe' do
+  brand = params.fetch('brand')
+  number = params.fetch('price').to_i
+  price = Shoe.to_money(number)
+  Shoe.create({brand: brand, price: price})
+  redirect '/'
+end
