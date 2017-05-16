@@ -8,28 +8,28 @@ get '/' do
   erb :index
 end
 
-get '/create_store' do
+get '/store/new' do
   @stores = Store.order('name')
   erb :create_store
 end
 
-post '/create_store' do
+post '/store/create' do
   name = params.fetch('name')
   Store.create({name: name})
-  redirect '/create_store'
+  redirect '/store/new'
 end
 
-get '/create_shoe' do
+get '/shoe/new' do
   @shoes = Shoe.order('brand')
   erb :create_shoe
 end
 
-post '/create_shoe' do
+post '/shoe/create' do
   brand = params.fetch('brand')
   number = params.fetch('price').to_f
   price = Shoe.to_money(number)
   Shoe.create({brand: brand, price: price})
-  redirect '/create_shoe'
+  redirect '/shoe/new'
 end
 
 get '/store/:id' do
